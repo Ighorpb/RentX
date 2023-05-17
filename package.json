@@ -12,11 +12,17 @@
     "expo": "~48.0.15",
     "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.4",
+    "postcss": "^8.4.23",
     "react": "18.2.0",
-    "react-native": "0.71.7"
+    "react-native": "0.71.8",
+    "styled-components": "^6.0.0-rc.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@types/react": "~18.0.27",
+    "@types/react-native": "^0.72.0",
+    "@types/styled-components-react-native": "^5.2.1",
+    "typescript": "^4.9.4"
   },
   "private": true
 }
