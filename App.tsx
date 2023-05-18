@@ -4,7 +4,8 @@ import { ThemeProvider } from 'styled-components';
 import * as SplashScreen from 'expo-splash-screen'; //  Exibir uma tela de carregamento (splash screen) personalizada ao iniciar um aplicativo Expo.
 
 //Importaçôes Utilities
-import { Home } from './src/screens/Home'; // Importação da Screen/Home
+//import { Home } from './src/screens/Home'; // Importação da Screen/Home
+import { CarDetails } from './src/screens/CarDetails';
 import theme from './src/global/styles/theme'; // Importação do theme/styles
 
 //Importação das Fontes
@@ -40,7 +41,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Home />
+      <CarDetails />
     </ThemeProvider>
   )
 }
