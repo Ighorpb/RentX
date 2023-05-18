@@ -3,8 +3,6 @@ import React from 'react'; // Importação do React
 import { ThemeProvider } from 'styled-components'; 
 import * as SplashScreen from 'expo-splash-screen'; //  Exibir uma tela de carregamento (splash screen) personalizada ao iniciar um aplicativo Expo.
 
-
-
 //Importaçôes Utilities
 import { Home } from './src/screens/Home'; // Importação da Screen/Home
 import theme from './src/global/styles/theme'; // Importação do theme/styles
@@ -21,8 +19,6 @@ import {
   Archivo_500Medium,
   Archivo_600SemiBold
 } from '@expo-google-fonts/archivo'; // Formatação das Fontes Archivo
-
-
 
 export default function App() {
   SplashScreen.preventAutoHideAsync();
