@@ -6,7 +6,9 @@ import * as SplashScreen from 'expo-splash-screen'; //  Exibir uma tela de carre
 //Importaçôes Utilities
 //import { Home } from './src/screens/Home'; // Importação da Screen/Home
 //import { CarDetails } from './src/screens/CarDetails';
-import { Scheduling } from './src/screens/Scheduling';
+//import { Scheduling } from './src/screens/SchedulingComplete';
+//import { SchedulingDetails } from './src/screens/SchedulingDetails';
+import { SchedulingComplete } from './src/screens/SchedulingComplete';
 import theme from './src/global/styles/theme'; // Importação do theme/styles
 
 //Importação das Fontes
@@ -42,7 +44,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Scheduling />
+      <SchedulingComplete />
     </ThemeProvider>
   )
 }

@@ -70,11 +70,11 @@ export function CarDetails() {
                     douro de lide indultado na praça Real Maestranza de Sevilla.
                     É um belíssimo carro para quem gosta de acelerar.
                 </About>
+            </Content>
 
                 <Footer>
                     <Button title="Confirmar" />
                 </Footer>
-            </Content>
         </Container>
     )
 }

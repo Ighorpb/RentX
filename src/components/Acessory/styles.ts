@@ -11,7 +11,7 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.background_primary};
 
   padding: 10px;
-  margin-bottom: 28px;
+  margin-bottom: 12px;
 `;
 
 export const Name = styled.Text`
