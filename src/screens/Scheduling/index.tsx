@@ -25,6 +25,10 @@ export function Scheduling() {
     function handleConfirmRental() {
         navigation.navigate('SchedulingDetails')
     }
+
+    function handleBack() {
+        navigation.goBack()
+    }
    
 
     return (
@@ -35,7 +39,7 @@ export function Scheduling() {
                     translucent
                     backgroundColor="transparent"
                 />
-                <BackButton />
+                <BackButton onPress={handleBack}/>
                 <Title>
                     Escolha uma{"\n"}data de início e{"\n"}fim do aluguel
                 </Title>

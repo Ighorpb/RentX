@@ -1,11 +1,11 @@
 import React from "react";
 import { StatusBar, useWindowDimensions } from "react-native";
-
+import { useNavigation } from "@react-navigation/native";
 import { ConfirmButton } from "../../components/ConfirmButton";
 import LogoSvg from '../../assets/logo_background_gray.svg'
 import DoneSvg from '../../assets/done.svg'
 
-import { 
+import {
     Container,
     Content,
     Title,
@@ -19,8 +19,13 @@ interface Props {
 }
 
 
-export function SchedulingComplete(){
-    const {width} = useWindowDimensions()
+export function SchedulingComplete() {
+    const navigation = useNavigation<any>()
+
+    function handleBackHome() {
+        navigation.navigate('Home')
+    }
+    const { width } = useWindowDimensions()
 
     return (
         <Container>
@@ -29,7 +34,7 @@ export function SchedulingComplete(){
                 translucent
                 backgroundColor="transparent"
             />
-            <LogoSvg width={width}/>
+            <LogoSvg width={width} />
 
             <Content>
                 <DoneSvg width={80} height={80} />
@@ -43,7 +48,7 @@ export function SchedulingComplete(){
             </Content>
 
             <Footer>
-                <ConfirmButton title="OK" onPress={() => console.log('Cliquei')}/>
+                <ConfirmButton title="OK" onPress={handleBackHome} />
             </Footer>
 
         </Container>

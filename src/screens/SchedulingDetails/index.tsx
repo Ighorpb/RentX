@@ -49,17 +49,23 @@ export function SchedulingDetails() {
 
     const navigation = useNavigation<any>()
 
-    function handleBackToTheHome() {
-        navigation.navigate('Home')
+    function handleScheduleComplete() {
+        navigation.navigate('SchedulingComplete')
     }
+
+
+    function handleBack() {
+        navigation.goBack()
+    }
+
     return (
         <Container>
             <Header>
-                <BackButton onPress={() => { }} />
+                <BackButton onPress={handleBack} />
             </Header>
 
             <CarImages>
-                <ImageSlider imageUrl={['https://cdn.sitewebmotors.com.br/uploads/userGallery/5fcfe53240728.png']} />
+                <ImageSlider imagesUrl={['https://cdn.sitewebmotors.com.br/uploads/userGallery/5fcfe53240728.png']} />
             </CarImages>
 
             <Content>
@@ -126,7 +132,7 @@ export function SchedulingDetails() {
 
 
             <Footer>
-                <Button title="Alugar agora!" onPress={handleBackToTheHome} color={theme.colors.success}/>
+                <Button title="Alugar agora!" onPress={handleScheduleComplete} color={theme.colors.success} />
             </Footer>
         </Container>
     )

@@ -1,11 +1,14 @@
 // Importação das Libs.
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar } from "react-native"; // Basicamente ajusta o Notch do celular 
 import { RFValue } from "react-native-responsive-fontsize"; // Permite que você defina tamanhos de fonte responsivos usando um valor relativo e fazendo o cálculo com base nas dimensões da tela.
 
 // Importação Utilities.
 import Logo from '../../assets/logo.svg'
 import { Car } from "../../components/Car";
+import { api } from '../../services/api'
+import { CarDTO } from "../../dtos/CarDTO";
+import { Load } from "../../components/Load";
 
 // "Componentes" para serem estilizados. 
 import {
@@ -18,23 +21,30 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 export function Home() {
+    const [cars, setCars] = useState<CarDTO[]>([])
+    const [loading, setLoading] = useState(true)
     const navigation = useNavigation<any>()
 
-    const carData = {
-        brand: 'Audi',
-        name: 'RS 5 Coupé',
-        rent: {
-            period: 'AO DIA',
-            price: 120,
-        },
-        thumbnail: 'https://cdn.sitewebmotors.com.br/uploads/userGallery/5fcfe53240728.png'
+    function handleCarDetails(car: CarDTO) {
+        navigation.navigate('CarDetails', { car })
     }
 
-    function handleCarDetails() {
-        navigation.navigate('CarDetails')
-    }
+    useEffect(() => {
+        async function fetchCars() {
+            try {
+                const response = await api.get('/cars')
+                setCars(response.data)
+            } catch (err) {
+                console.log(err)
+            } finally {
+                setLoading(false)
+            }
+        }
 
-    
+        fetchCars()
+    }, [])
+
+
     return (
         <Container>
             <StatusBar // Configs do StatusBar
@@ -53,14 +63,15 @@ export function Home() {
                     </TotalCars>
                 </HeaderContent>
             </Header>
-
-            <CarList
-            data={[1,2,3,4,5,6]} 
-            keyExtractor={item => String(item)}
-            renderItem={({item}) => 
-            <Car data={carData} onPress={handleCarDetails}/>}
-
-            />
+            {loading ? <Load /> :
+                <CarList
+                    data={cars}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) =>
+                        <Car data={item} onPress={() => handleCarDetails(item)} />
+                    }
+                />
+            }
 
         </Container>
     )
