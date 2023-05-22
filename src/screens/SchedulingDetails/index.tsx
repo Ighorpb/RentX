@@ -7,6 +7,7 @@ import { ImageSlider } from "../../components/ImageSlider";
 import { Acessory } from "../../components/Acessory";
 import { Button } from "../../components/Button";
 import { useTheme } from "styled-components";
+import { useNavigation } from "@react-navigation/native";
 
 import speedSvg from '../../assets/speed.svg'
 import accelerationSvg from '../../assets/acceleration.svg'
@@ -45,6 +46,12 @@ import { RFValue } from "react-native-responsive-fontsize";
 
 export function SchedulingDetails() {
     const theme = useTheme()
+
+    const navigation = useNavigation<any>()
+
+    function handleBackToTheHome() {
+        navigation.navigate('Home')
+    }
     return (
         <Container>
             <Header>
@@ -119,7 +126,7 @@ export function SchedulingDetails() {
 
 
             <Footer>
-                <Button title="Confirmar" />
+                <Button title="Alugar agora!" onPress={handleBackToTheHome} color={theme.colors.success}/>
             </Footer>
         </Container>
     )

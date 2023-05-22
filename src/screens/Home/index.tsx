@@ -15,8 +15,11 @@ import {
     TotalCars,
     CarList
 } from './styles'
+import { useNavigation } from "@react-navigation/native";
 
 export function Home() {
+    const navigation = useNavigation<any>()
+
     const carData = {
         brand: 'Audi',
         name: 'RS 5 Coupé',
@@ -25,6 +28,10 @@ export function Home() {
             price: 120,
         },
         thumbnail: 'https://cdn.sitewebmotors.com.br/uploads/userGallery/5fcfe53240728.png'
+    }
+
+    function handleCarDetails() {
+        navigation.navigate('CarDetails')
     }
 
     
@@ -50,7 +57,8 @@ export function Home() {
             <CarList
             data={[1,2,3,4,5,6]} 
             keyExtractor={item => String(item)}
-            renderItem={({item}) => <Car data={carData} />}
+            renderItem={({item}) => 
+            <Car data={carData} onPress={handleCarDetails}/>}
 
             />
 
