@@ -53,6 +53,7 @@ interface RentalPeriod {
 
 export function SchedulingDetails() {
     const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod)
+    const [loading, setLoading] = useState(false)
 
     const route = useRoute()
     const { car, dates } = route.params as Params;
@@ -68,19 +69,26 @@ export function SchedulingDetails() {
             ...response.data.unavailable_dates,
             ...dates,
         ]
+        setLoading(true)
+        api.post('schedules_byuser', {
+            user_id: 1,
+            car,
+            startDate: format(parseISO(firstDate), 'dd/MM/yyyy'),
+            endDate: format(parseISO(endDate), 'dd/MM/yyyy'),
+
+        })
 
         api.put(`/schedules_bycars/${car.id}`, {
             id: car.id,
             unavailable_dates
         })
             .then(() => navigation.navigate('SchedulingComplete'))
-            .catch(()=> Alert.alert('Não foi possível confirmar o agendamento.'))
-
-
-       
+            .catch(()=> {
+                setLoading(false)
+                Alert.alert('Não foi possível confirmar o agendamento.')
+            })
     }
-
-
+    
     function handleBack() {
         navigation.goBack()
     }
@@ -173,7 +181,13 @@ export function SchedulingDetails() {
 
 
             <Footer>
-                <Button title="Alugar agora!" onPress={handleScheduleComplete} color={theme.colors.success} />
+                <Button 
+                title="Alugar agora!" 
+                onPress={handleScheduleComplete} 
+                color={theme.colors.success}
+                enabled={!loading}
+                loading={loading}
+                />
             </Footer>
         </Container>
     )

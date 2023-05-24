@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { Alert, StatusBar } from "react-native";
+import { StatusBar } from "react-native";
 import { useState } from "react";
 import { format, parseISO } from "date-fns";
 
@@ -21,6 +21,7 @@ import {
     Content,
     Footer,
 } from "./styles";
+import theme from "../../global/styles/theme";
 
 
 interface RentalPeriod {
@@ -42,14 +43,10 @@ export function Scheduling() {
     const navigation = useNavigation<any>()
 
     function handleConfirmRental() {
-        if (!rentalPeriod.start || !rentalPeriod.end){
-            Alert.alert('Selecione as datas para alugar!')
-        } else {
-            navigation.navigate('SchedulingDetails', {
-                car,
-                dates: Object.keys(markedDates)
-            })
-        }
+        navigation.navigate('SchedulingDetails', {
+            car,
+            dates: Object.keys(markedDates)
+        })
     }
 
     function handleBack() {
@@ -79,42 +76,47 @@ export function Scheduling() {
     }
 
 
-        return (
-            <Container>
-                <Header>
-                    <StatusBar
-                        barStyle="light-content"
-                        translucent
-                        backgroundColor="transparent"
-                    />
-                    <BackButton onPress={handleBack} />
-                    <Title>
-                        Escolha uma{"\n"}data de início e{"\n"}fim do aluguel
-                    </Title>
-                    <RentalPeriod>
-                        <DateInfo>
-                            <DateTitle>DE</DateTitle>
-                            <DateValue selected={!!rentalPeriod.start}>{rentalPeriod.start}</DateValue>
-                        </DateInfo>
+    return (
+        <Container>
+            <Header>
+                <BackButton onPress={handleBack} color={theme.colors.shape} />
+                <StatusBar
+                    barStyle="light-content"
+                    translucent
+                    backgroundColor="transparent"
+                />
+                
+                <Title>
+                    Escolha uma{"\n"}data de início e{"\n"}fim do aluguel
+                </Title>
+                <RentalPeriod>
+                    <DateInfo>
+                        <DateTitle>DE</DateTitle>
+                        <DateValue selected={!!rentalPeriod.start}>{rentalPeriod.start}</DateValue>
+                    </DateInfo>
 
-                        <ArrowSvg />
+                    <ArrowSvg />
 
-                        <DateInfo>
-                            <DateTitle>ATÉ</DateTitle>
-                            <DateValue selected={!!rentalPeriod.end}>{rentalPeriod.end}</DateValue>
-                        </DateInfo>
-                    </RentalPeriod>
-                </Header>
-                <Content>
-                    <Calendar
-                        markedDates={markedDates}
-                        onDayPress={handleChangeDate}
-                    />
-                </Content>
+                    <DateInfo>
+                        <DateTitle>ATÉ</DateTitle>
+                        <DateValue selected={!!rentalPeriod.end}>{rentalPeriod.end}</DateValue>
+                    </DateInfo>
+                </RentalPeriod>
+            </Header>
+            <Content>
+                <Calendar
+                    markedDates={markedDates}
+                    onDayPress={handleChangeDate}
+                />
+            </Content>
 
-                <Footer>
-                    <Button title="Confirmar" onPress={handleConfirmRental} />
-                </Footer>
-            </Container>
-        );
+            <Footer>
+                <Button
+                    title="Confirmar"
+                    onPress={handleConfirmRental}
+                    enabled={!!rentalPeriod.start}
+                />
+            </Footer>
+        </Container>
+    );
 }

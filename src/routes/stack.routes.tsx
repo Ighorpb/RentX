@@ -1,6 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
+import { MyCars } from '../screens/MyCars';
 import { Home } from '../screens/Home';
 import { CarDetails } from '../screens/CarDetails';
 import { Scheduling } from '../screens/Scheduling';
@@ -15,6 +16,10 @@ export function StackRoutes() {
             <Screen
                 name='Home'
                 component={Home}
+            />
+            <Screen
+                name='MyCars'
+                component={MyCars}
             />
             <Screen
                 name='CarDetails'

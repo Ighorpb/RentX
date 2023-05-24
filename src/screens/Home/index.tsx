@@ -1,7 +1,10 @@
 // Importação das Libs.
 import React, { useEffect, useState } from "react";
-import { StatusBar } from "react-native"; // Basicamente ajusta o Notch do celular 
-import { RFValue } from "react-native-responsive-fontsize"; // Permite que você defina tamanhos de fonte responsivos usando um valor relativo e fazendo o cálculo com base nas dimensões da tela.
+import { StatusBar } from "react-native"; 
+import { RFValue } from "react-native-responsive-fontsize"; 
+import { useNavigation } from "@react-navigation/native";
+import { useTheme } from "styled-components";
+
 
 // Importação Utilities.
 import Logo from '../../assets/logo.svg'
@@ -9,6 +12,7 @@ import { Car } from "../../components/Car";
 import { api } from '../../services/api'
 import { CarDTO } from "../../dtos/CarDTO";
 import { Load } from "../../components/Load";
+import {Ionicons} from '@expo/vector-icons'
 
 // "Componentes" para serem estilizados. 
 import {
@@ -16,17 +20,22 @@ import {
     Header,
     HeaderContent,
     TotalCars,
-    CarList
+    CarList,
+    MyCarsButton
 } from './styles'
-import { useNavigation } from "@react-navigation/native";
 
 export function Home() {
-    const [cars, setCars] = useState<CarDTO[]>([])
-    const [loading, setLoading] = useState(true)
-    const navigation = useNavigation<any>()
+    const [cars, setCars] = useState<CarDTO[]>([]);
+    const [loading, setLoading] = useState(true);
+    const navigation = useNavigation<any>();
+    const theme = useTheme();
 
     function handleCarDetails(car: CarDTO) {
         navigation.navigate('CarDetails', { car })
+    }
+
+    function handleOpenMyCars() {
+        navigation.navigate('MyCars')
     }
 
     useEffect(() => {
@@ -72,7 +81,14 @@ export function Home() {
                     }
                 />
             }
+            <MyCarsButton onPress={handleOpenMyCars}>
+            <Ionicons 
+            name= "ios-car-sport" 
+            size={32}
+            color={theme.colors.shape}
 
+            />
+        </MyCarsButton>
         </Container>
     )
 }
