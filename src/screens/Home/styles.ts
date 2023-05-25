@@ -8,14 +8,14 @@ import { TouchableOpacity } from "react-native";
 export const Container = styled.View`
   flex: 1;
 
-  background-color: ${({ theme }) => theme.colors.background_primary};
+  background-color: ${({ theme }) => theme.colors.line};
 `;
 
 export const Header = styled.View`
   width: 100%;
   height: 113px;
 
-  background-color: ${({ theme }) => theme.colors.header};
+  background-color: ${({ theme }) => theme.colors.main_light};
   justify-content: flex-end;
   padding: 32px 24px;
 `;
